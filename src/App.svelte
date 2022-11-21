@@ -1,20 +1,36 @@
 <script>
-  //Calander?
+  //Calendar?
   //Animation of stick figure per reload to signify day
-  //Uses graphic of calander (either img or canvas)
+  //Uses graphic of calendar (either img or canvas)
   //Use date function?
+
+  //Plan
+  //Create Calendar
+  //Create stickfigure
+  //Create move cycle
+  //Create "openDoor" 
+  //Create end points per date
+  //Create "doorpoints" (probably boolean)
+  
+
 
 import P5 from 'p5-svelte';
 
-let width = 55;
-let height = 55;
+let width = 1000;
+let height = 1000;
 
 let sketch = (p5) => {
   p5.setup = () => {
-    p5.createCanvas(400, 400);
+    p5.createCanvas(1000, 725);
   };
   p5.draw = () => {
-    p5.ellipse(p5.width / 2, p5.height / 2, width, height);
+  p5.background(100);
+  p5.noStroke();
+  for (let i = 0; i < height; i += 143) {
+    p5.rect(0, i, width, 10);
+    p5.fill(500);
+    p5.rect(i, 0, 10, height);
+  }
   };
 };
 
@@ -37,18 +53,6 @@ function openDoor() {
 
 
 </script>
-
-<label>
-	Width
-	<input type="range" bind:value={width} min="100" max="1000" step="0.01" />
-	{width}
-</label>
-
-<label>
-	Height
-	<input type="range" bind:value={height} min="100" max="1000" step="0.01" />
-	{height}
-</label>
 
 <main>
   <P5 {sketch} />
