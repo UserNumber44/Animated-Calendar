@@ -5,8 +5,7 @@
 
   let day = [];
   let months = ["January", "Febuary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-  let years = [];
-
+  let time = new Date()
   let currentDay = 0
   let currentMonth = 0
   let currentYear = 0
@@ -16,7 +15,6 @@
     day.push(i);
   }
   day=day
-
 
 function addMonth(){
   currentMonth++
@@ -34,6 +32,7 @@ function subrtractMonth() {
   }
 }
 
+currentYear = time.getFullYear()
 
 </script>
 
@@ -54,13 +53,13 @@ function subrtractMonth() {
   </div>
   
   <ul class="weekdays">
-    <li>Mo</li>
-    <li>Tu</li>
-    <li>We</li>
-    <li>Th</li>
-    <li>Fr</li>
-    <li>Sa</li>
-    <li>Su</li>
+    <li>Mon</li>
+    <li>Tus</li>
+    <li>Wed</li>
+    <li>Thu</li>
+    <li>Fri</li>
+    <li>Sat</li>
+    <li>Sun</li>
   </ul>
   
   <ul class="days" >  
@@ -124,6 +123,7 @@ main {font-family: Verdana, sans-serif;}
 }
 
 .days li {
+  align-items: center;
   list-style-type: none;
   display: inline-block;
   width: 13.6%;
