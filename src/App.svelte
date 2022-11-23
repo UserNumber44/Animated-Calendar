@@ -1,38 +1,39 @@
 <script>
   import { tweened } from 'svelte/motion';
 	import { cubicOut } from 'svelte/easing';
-  import { loop_guard } from 'svelte/internal';
+  import { each, loop_guard } from 'svelte/internal';
 
   let day = [];
-  let weekday = ["Mon", "Tus", "Wed", "Thu", "Fri", "Sat", "Sun"];
   let months = ["January", "Febuary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   let years = [];
 
   let currentDay = 0
-  let currentWeekDay = 0
   let currentMonth = 0
   let currentYear = 0
   
 
-function createDay(){
-  for(let i = 0; i <= 31; i++){
+  for(let i = 1; i <= 31; i++){
     day.push(i);
   }
-}
+  day=day
+
 
 function addMonth(){
   currentMonth++
-  if(currentMonth > day.length -1){
+  if(currentMonth > 11){
     currentMonth = 0;
+    currentYear++
   }
 }
 
 function subrtractMonth() {
   currentMonth--
   if(currentMonth < 0){
-    currentMonth = day.length -1;
+    currentMonth = 11;
+    currentYear--
   }
 }
+
 
 </script>
 
@@ -41,10 +42,14 @@ function subrtractMonth() {
     <ul>
       <button class="prev" on:click= {subrtractMonth}>&#10094;</button>
       <button class="next" on:click= {addMonth}>&#10095;</button>
+      {#each months as m, i}
+      {#if currentMonth == i}
       <li>
-        Month<br>
-        <span style="font-size:18px">Year</span>
+        {m}<br>
+        <span style="font-size:18px">{currentYear}</span>
       </li>
+      {/if}
+      {/each}
     </ul>
   </div>
   
@@ -58,41 +63,12 @@ function subrtractMonth() {
     <li>Su</li>
   </ul>
   
-  <ul class="days">  
-    <li>1</li>
-    <li>2</li>
-    <li>3</li>
-    <li>4</li>
-    <li>5</li>
-    <li>6</li>
-    <li>7</li>
-    <li>8</li>
-    <li>9</li>
-    <li><span class="active">10</span></li>
-    <li>11</li>
-    <li>12</li>
-    <li>13</li>
-    <li>14</li>
-    <li>15</li>
-    <li>16</li>
-    <li>17</li>
-    <li>18</li>
-    <li>19</li>
-    <li>20</li>
-    <li>21</li>
-    <li>22</li>
-    <li>23</li>
-    <li>24</li>
-    <li>25</li>
-    <li>26</li>
-    <li>27</li>
-    <li>28</li>
-    <li>29</li>
-    <li>30</li>
-    <li>31</li>
+  <ul class="days" >  
+    {#each day as d}
+      <li>{d}</li>
+    {/each}
+    <!-- <li><span class="active">10</span></li> -->
   </ul>
-  {createDay}
-  {console.log(day[0])}
 </main>
 
 <style>
@@ -152,6 +128,8 @@ main {font-family: Verdana, sans-serif;}
   display: inline-block;
   width: 13.6%;
   text-align: center;
+  margin-left: 5px;
+  margin-right: 5px;
   margin-bottom: 5px;
   font-size:12px;
   color: #777;
