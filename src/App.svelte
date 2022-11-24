@@ -1,7 +1,7 @@
 <script>
   import { tweened } from 'svelte/motion';
 	import { cubicOut } from 'svelte/easing';
-  import { each, loop_guard } from 'svelte/internal';
+  import { fade, fly } from 'svelte/transition';
 
   let day = [];
   let months = ["January", "Febuary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -46,9 +46,7 @@ function subrtractMonth() {
 </script>
 
 <main>
-  
-  <progress value={$progress}></progress>
-  
+  <progress value={$progress} max="<time datetime='12-31'>" in:fly="{{ y: -200, duration: 2000}}" out:fly="{{ y: 200, duration: 2000}}"></progress>
   
   <div class="month">      
     <ul>
@@ -79,6 +77,5 @@ function subrtractMonth() {
     {#each day as d}
       <li>{d}</li>
     {/each}
-    <!-- <li><span class="active">10</span></li> -->
   </ul>
 </main>
