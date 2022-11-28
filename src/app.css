@@ -32,13 +32,13 @@ main {font-family: Verdana, sans-serif;}
 
 .weekdays {
   margin: 0;
-  padding: 10px 0;
+  padding: 10px 0px;
   background-color: #ddd;
 }
 
 .weekdays li {
   display: inline-block;
-  width: 13.6%;
+  width: 13%;
   color: #666;
   text-align: center;
 }
@@ -53,7 +53,7 @@ main {font-family: Verdana, sans-serif;}
   align-items: center;
   list-style-type: none;
   display: inline-block;
-  width: 13.6%;
+  width: 12.2%;
   text-align: center;
   margin-left: 3px;
   margin-right: 3px;

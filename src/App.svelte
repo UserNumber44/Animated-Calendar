@@ -9,9 +9,10 @@
   let currentDay = time.getDate()
   let currentMonth = 0
   let currentYear = time.getFullYear()
+  let indicator = time.getDate()
   
 //tasks:
-//weekday formatting fix
+//weekday formatting update per month
 //put in active class
 //progress bar
 
@@ -46,7 +47,7 @@ function subrtractMonth() {
 </script>
 
 <main>
-  <progress value={$progress} max="<time datetime='12-31'>" in:fly="{{ y: -200, duration: 2000}}" out:fly="{{ y: 200, duration: 2000}}"></progress>
+  <progress value={$progress} min={1} max=day in:fly="{{ y: -200, duration: 2000}}" out:fly="{{ y: 200, duration: 2000}}"></progress>
   
   <div class="month">      
     <ul>
@@ -73,9 +74,12 @@ function subrtractMonth() {
     <li>Sun</li>
   </ul>
   
-  <ul class="days" >  
+  <ul class="days" > 
     {#each day as d}
       <li>{d}</li>
+      {#if d = indicator}
+        
+      {/if}
     {/each}
   </ul>
 </main>
