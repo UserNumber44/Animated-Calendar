@@ -83,7 +83,23 @@ function addMonth(){
   if(currentMonth > 11){
     currentMonth = 0;
     currentYear++
+  }if((currentMonth + 1)%2 == 0){
+    day = [];
+    for(let i = 1; i <= 30; i++){
+      day.push(i);
+    }
+  }if((currentMonth + 1)%2 == 1){
+    day = [];
+    for(let i = 1; i <= 31; i++){
+      day.push(i);
+    }
+  }if(currentMonth == 1){
+    day = [];
+    for(let i = 1; i <= 28; i++){
+      day.push(i);
+    }
   }
+day=day
 }
 
 function subrtractMonth() {
@@ -124,7 +140,7 @@ function subrtractMonth() {
   
   <ul class="days" > 
     {#each day as d}
-        <li>{d}</li>
+        <li>{d}</li> 
     {/each}  
   </ul>
 </main>
