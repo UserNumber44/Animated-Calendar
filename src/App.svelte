@@ -89,18 +89,11 @@ function subrtractMonth(){
     }day=day
   }
 }
-
 </script>
 
 <main>
-  {#each day as d, i}
-    {#if d == i}
-    <progress value={$progress} min=1 max={d} in:fly="{{ x: -200, duration: 2000}}" out:fly="{{ x: 200, duration: 2000}}"></progress>
-    {/if}
-  {/each}
-
   <h1>{time}</h1>
-
+  
   <div class="month">      
     <ul>
       <button class="prev" on:click= {subrtractMonth}>&#10094;</button>
@@ -126,7 +119,9 @@ function subrtractMonth(){
   
   <ul class="days" > 
     {#each day as d}
-        <li>{d}</li> 
+    <li>{d}</li> 
     {/each}  
   </ul>
+  
+  <progress value={$progress} min=1 max=31></progress>
 </main>
