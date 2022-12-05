@@ -1,12 +1,11 @@
 <script>
   import { tweened } from 'svelte/motion';
 	import { cubicOut } from 'svelte/easing';
-  import { fade, fly } from 'svelte/transition';
   import { each } from 'svelte/internal';
 
   let day = [];
-  let months = ["January", "Febuary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-  let weekday = ["Sun", "Mon", "Tus", "Wed", "Thu", "Fri", "Sat"]
+  const months = ["January", "Febuary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  const weekday = ["Sun", "Mon", "Tus", "Wed", "Thu", "Fri", "Sat"]
   let time = new Date()
   let currentDay = time.getDate()
   let currentMonth = 0
@@ -23,7 +22,8 @@ const progress = tweened(0, {
 
 progress.set(currentDay)
 
-for(let i = 1; i <= 31; i++){
+let d = new Date(currentYear, currentMonth + 1, 0).getDate()
+for(let i = 1; i <= d; i++){
   day.push(i);
 }
 day=day
@@ -33,38 +33,11 @@ function addMonth(){
   if(currentMonth > 11){
     currentMonth = 0;
     currentYear++
-  }if((currentMonth + 1)%2 == 0){
+  }let d = new Date(currentYear, currentMonth + 1, 0).getDate()
     day = [];
-    for(let i = 1; i <= 30; i++){
-      day.push(i);
-    }
-  }if((currentMonth + 1)%2 == 1){
-    day = [];
-    for(let i = 1; i <= 31; i++){
-      day.push(i);
-    }
-  }if(currentMonth == 1){
-    day = [];
-    for(let i = 1; i <= 28; i++){
-      day.push(i);
-    }
-  }
-    if((currentMonth + 1)%2 == 0){ 
-    day = [];
-    for(let i = 1; i <= 30; i++){
-      day.push(i);}
-    }
-if((currentMonth + 1)%2 == 1){ 
-    day = [];
-    for(let i = 1; i <= 31; i++){
-      day.push(i);}
-    }day=day
-  if(currentMonth == 1){
-    day = [];
-    for(let i = 1; i <= 28; i++){
+    for(let i = 1; i <= d; i++){
       day.push(i);
     }day=day
-  }
 }
 
 function subrtractMonth(){
@@ -72,29 +45,18 @@ function subrtractMonth(){
   if(currentMonth < 0){
     currentMonth = 11;
     currentYear--
-  }
-    if((currentMonth + 1)%2 == 0){ 
+  }let d = new Date(currentYear, currentMonth + 1, 0).getDate()
     day = [];
-    for(let i = 1; i <= 30; i++){
-      day.push(i);}
-    }if((currentMonth + 1)%2 == 1){ 
-    day = [];
-    for(let i = 1; i <= 31; i++){
-      day.push(i);}
-    }day=day
-    if(currentMonth == 1){
-    day = [];
-    for(let i = 1; i <= 28; i++){
+    for(let i = 1; i <= d; i++){
       day.push(i);
     }day=day
-  }
 }
+
 </script>
 
-<main>
-  <h1>{time}</h1>
-  
+<main>  
   <div class="month">      
+    <h2>{time}</h2>
     <ul>
       <button class="prev" on:click= {subrtractMonth}>&#10094;</button>
       <button class="next" on:click= {addMonth}>&#10095;</button>
@@ -123,5 +85,5 @@ function subrtractMonth(){
     {/each}  
   </ul>
   
-  <progress value={$progress} min=1 max=31></progress>
+  <progress value={$progress} min=1 max={new Date(currentYear, currentMonth + 1, 0).getDate()}></progress>
 </main>
